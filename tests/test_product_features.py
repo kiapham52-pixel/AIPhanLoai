@@ -1,5 +1,6 @@
 import io
 import json
+import sqlite3
 import uuid
 from types import SimpleNamespace
 from xml.etree import ElementTree
@@ -8,6 +9,7 @@ import pytest
 
 import app as app_module
 from services import chat_service
+from services import config_service
 from services import detection_service
 from app import app
 
@@ -33,7 +35,8 @@ def client(tmp_path, monkeypatch):
         yield client
 
 
-def test_session_cookie_is_secure_http_only_and_same_site_lax(client):
+def test_session_cookie_is_secure_http_only_and_same_site_lax(client, monkeypatch):
+    monkeypatch.setitem(app.config, "SESSION_COOKIE_SECURE", True)
     response = client.get("/api/health")
 
     assert app.config["SESSION_COOKIE_SECURE"] is True
@@ -43,12 +46,129 @@ def test_session_cookie_is_secure_http_only_and_same_site_lax(client):
     assert "SameSite=Lax" in cookie
 
 
+@pytest.mark.parametrize(
+    ("environment", "secure_override", "expected"),
+    [
+        ("development", "", False),
+        ("production", "", True),
+    ],
+)
+def test_session_cookie_policy_by_environment(monkeypatch, environment, secure_override, expected):
+    settings = {"APP_ENV": environment, "SESSION_COOKIE_SECURE": secure_override}
+    monkeypatch.setattr(
+        config_service,
+        "get_setting",
+        lambda name, default="": settings.get(name, default),
+    )
+
+    assert config_service.get_session_cookie_secure() is expected
+
+
+def test_production_session_cookie_cannot_be_configured_insecure(monkeypatch):
+    settings = {"APP_ENV": "production", "SESSION_COOKIE_SECURE": "false"}
+    monkeypatch.setattr(
+        config_service,
+        "get_setting",
+        lambda name, default="": settings.get(name, default),
+    )
+
+    with pytest.raises(ValueError, match="cannot be false in production"):
+        config_service.get_session_cookie_secure()
+
+
+def test_development_cookie_is_not_secure_over_local_http(client, monkeypatch):
+    settings = {"APP_ENV": "development"}
+    monkeypatch.setattr(
+        config_service,
+        "get_setting",
+        lambda name, default="": settings.get(name, default),
+    )
+    monkeypatch.setitem(app.config, "SESSION_COOKIE_SECURE", config_service.get_session_cookie_secure())
+    client.environ_base["wsgi.url_scheme"] = "http"
+
+    response = client.get("/api/health")
+
+    assert "Secure" not in response.headers["Set-Cookie"]
+    assert "HttpOnly" in response.headers["Set-Cookie"]
+    assert "SameSite=Lax" in response.headers["Set-Cookie"]
+
+
+def test_sqlite_connections_enforce_declared_foreign_keys(tmp_path, monkeypatch):
+    monkeypatch.setattr(app_module, "DATABASE_PATH", tmp_path / "waste_ai_test.db")
+    app_module.init_db()
+    conn = app_module.sqlite3_connect()
+    try:
+        assert conn.execute("PRAGMA foreign_keys").fetchone()[0] == 1
+        with pytest.raises(sqlite3.IntegrityError):
+            conn.execute(
+                "INSERT INTO chat_messages (session_id, role, content, created_at) "
+                "VALUES (?, ?, ?, ?)",
+                ("missing-session", "user", "test", "2026-01-01 00:00:00"),
+            )
+    finally:
+        conn.close()
+
+
 def test_health_endpoint_returns_system_status(client):
     response = client.get("/api/health")
     assert response.status_code == 200
     payload = response.get_json()
     assert payload["server"] == "ok"
     assert payload["model"] in {"ok", "unavailable"}
+
+
+def test_health_endpoint_remains_available_when_model_is_unavailable(client, monkeypatch):
+    monkeypatch.setattr(app_module, "model", None)
+
+    response = client.get("/api/health")
+
+    assert response.status_code == 200
+    assert response.get_json()["model"] == "unavailable"
+
+
+def test_loaded_model_keeps_the_six_class_order_and_cpu_device():
+    model = detection_service.model
+    assert model is not None
+    assert model.names == {
+        0: "BIODEGRADABLE",
+        1: "CARDBOARD",
+        2: "GLASS",
+        3: "METAL",
+        4: "PAPER",
+        5: "PLASTIC",
+    }
+    assert next(model.model.parameters()).device.type == "cpu"
+
+
+def test_camera_api_returns_503_when_model_is_unavailable(client, monkeypatch):
+    monkeypatch.setattr(detection_service, "model", None)
+    success, encoded = app_module.cv2.imencode(".jpg", app_module.np.zeros((32, 32, 3), dtype="uint8"))
+    assert success
+
+    response = client.post(
+        "/camera/predict",
+        data={"image": (io.BytesIO(encoded.tobytes()), "camera.jpg")},
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 503
+    assert response.get_json()["success"] is False
+    assert "không khả dụng" in response.get_json()["message"]
+
+
+def test_upload_returns_503_when_model_is_unavailable(client, monkeypatch):
+    monkeypatch.setattr(detection_service, "model", None)
+    success, encoded = app_module.cv2.imencode(".jpg", app_module.np.zeros((32, 32, 3), dtype="uint8"))
+    assert success
+
+    response = client.post(
+        "/predict",
+        data={"image": (io.BytesIO(encoded.tobytes()), "upload.jpg")},
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 503
+    assert "Mô hình AI hiện không khả dụng." in response.get_data(as_text=True)
 
 
 def test_recycling_endpoint_returns_structured_material_data(client):
@@ -140,6 +260,28 @@ def test_upload_with_no_detections_renders_uncertain_state(client, monkeypatch):
     )
     assert response.status_code == 200
     assert "AI chưa đủ chắc chắn" in response.get_data(as_text=True)
+
+
+def test_upload_rejects_invalid_image_contents(client):
+    response = client.post(
+        "/predict",
+        data={"image": (io.BytesIO(b"not an image"), "invalid.jpg")},
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 400
+    assert "Tệp đã chọn không phải ảnh hợp lệ." in response.get_data(as_text=True)
+
+
+def test_camera_api_rejects_invalid_image_contents(client):
+    response = client.post(
+        "/camera/predict",
+        data={"image": (io.BytesIO(b"not an image"), "camera.jpg")},
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 400
+    assert response.get_json()["success"] is False
 
 
 def test_detection_service_rejects_classes_outside_the_six_trained_labels(monkeypatch):

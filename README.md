@@ -34,12 +34,14 @@
 
 ## Yêu cầu
 
-- Python 3.10 trở lên
+- Python 3.14.7 (các phiên bản Python khác cần bộ phiên bản thư viện tương thích)
 - `pip`
 - Git để tải mã nguồn
 - Camera nếu muốn dùng tính năng nhận diện trực tiếp
 
 Mô hình ứng dụng đã được đưa vào repository tại `models/phan_loai_rac.pt`. Không cần tải bộ dữ liệu để chạy ứng dụng. Nhận diện chạy trên CPU; tốc độ phụ thuộc vào máy tính.
+
+Trước khi chạy, xác nhận tệp `models/phan_loai_rac.pt` tồn tại. Nếu model thiếu hoặc không tải được, ứng dụng ghi lỗi vào log nhưng vẫn phục vụ phần kiến thức/dự án; `/api/health` báo model `unavailable` và các yêu cầu nhận diện trả HTTP 503.
 
 ## Cài đặt và chạy
 
@@ -49,17 +51,19 @@ Mô hình ứng dụng đã được đưa vào repository tại `models/phan_lo
 git clone https://github.com/kiapham52-pixel/AIPhanLoai.git
 cd AIPhanLoai
 
-py -3 -m venv .venv
+py -3.14 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-python -m pip install Flask numpy opencv-python ultralytics
+Copy-Item .env.example .env
+python -m pip install -r requirements.txt
 python app.py
 ```
 
 Nếu PowerShell không cho phép kích hoạt môi trường ảo, có thể gọi Python trực tiếp:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install Flask numpy opencv-python ultralytics
+Copy-Item .env.example .env
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe app.py
 ```
 
@@ -72,11 +76,14 @@ cd AIPhanLoai
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install Flask numpy opencv-python ultralytics
+cp .env.example .env
+python -m pip install -r requirements.txt
 python app.py
 ```
 
 Mở [http://localhost:5000](http://localhost:5000) trong trình duyệt. Khi được hỏi, cho phép trang web truy cập camera. Camera thường cần `localhost` hoặc kết nối HTTPS.
+
+Tệp `.env.example` đặt `APP_ENV=development` để cookie hoạt động khi chạy HTTP trên localhost. Khi triển khai HTTPS, đổi thành `APP_ENV=production`; cấu hình này luôn bật thuộc tính `Secure` và từ chối cấu hình production không an toàn. `SESSION_COOKIE_HTTPONLY` và `SameSite=Lax` luôn được bật.
 
 Ứng dụng tự tạo cơ sở dữ liệu `waste_ai.db`, thư mục tải ảnh `uploads/`, thư mục kết quả `static/results/` và khóa phiên Flask khi khởi động lần đầu. Đây là dữ liệu cục bộ; không cần tạo các tệp này trước.
 
@@ -175,12 +182,14 @@ Chat giới hạn 20 yêu cầu mỗi phút cho mỗi phiên trình duyệt. Ả
 
 ## Chạy kiểm thử
 
-Cài thêm `pytest` trong môi trường ảo rồi chạy:
+Cài các dependency kiểm thử trong môi trường ảo rồi chạy:
 
 ```bash
-python -m pip install pytest
+python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
+
+`pytest.ini` giới hạn việc tìm test trong `tests/`; các script demo `test_camera.py` và `test_yolo.py` ở thư mục gốc mở camera và không phải test tự động.
 
 ## Cấu trúc dự án
 
@@ -188,6 +197,9 @@ python -m pytest -q
 app.py                          Ứng dụng Flask và các route/API
 services/                       Nhận diện, chat, kiến thức và gợi ý dự án
 models/phan_loai_rac.pt         Model YOLO được ứng dụng sử dụng
+requirements.txt                Dependency chạy ứng dụng
+requirements-dev.txt            Dependency kiểm thử
+pytest.ini                      Cấu hình tìm test tự động
 data/recycling_knowledge.json   Dữ liệu kiến thức tái chế
 templates/                      Giao diện HTML
 static/                         CSS, JavaScript và tài nguyên giao diện

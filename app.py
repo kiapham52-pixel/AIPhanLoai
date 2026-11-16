@@ -14,8 +14,9 @@ from flask import Flask, Response, jsonify, render_template, request, send_from_
 from werkzeug.utils import secure_filename
 
 from services.chat_service import get_chat_backend, generate_fallback_chat_reply, generate_llm_reply
-from services.config_service import get_flask_secret_key, get_setting
+from services.config_service import get_flask_secret_key, get_session_cookie_secure
 from services.detection_service import (
+    ModelUnavailableError,
     build_result_payload,
     display_class_name,
     get_confidence_state,
@@ -50,10 +51,7 @@ app.config["RESULTS_FOLDER"] = str(RESULTS_FOLDER)
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
-secure_cookie_setting = get_setting("SESSION_COOKIE_SECURE", "true").lower()
-if secure_cookie_setting not in {"true", "false"}:
-    raise ValueError("SESSION_COOKIE_SECURE must be set to true or false")
-app.config["SESSION_COOKIE_SECURE"] = secure_cookie_setting == "true"
+app.config["SESSION_COOKIE_SECURE"] = get_session_cookie_secure()
 
 
 @app.before_request
@@ -136,7 +134,9 @@ def init_db():
 
 
 def sqlite3_connect():
-    return sqlite3.connect(str(DATABASE_PATH))
+    conn = sqlite3.connect(str(DATABASE_PATH))
+    conn.execute("PRAGMA foreign_keys = ON")
+    return conn
 
 
 def reserve_chat_request(session_id, max_requests, window_seconds=60):
@@ -320,7 +320,7 @@ def predict():
     image_array = np.frombuffer(file_bytes, dtype=np.uint8)
     frame = cv2.imdecode(image_array, cv2.IMREAD_COLOR) if file_bytes else None
     if frame is None:
-        return render_template("index.html", message="Tệp đã chọn không phải ảnh hợp lệ.")
+        return render_template("index.html", message="Tệp đã chọn không phải ảnh hợp lệ."), 400
 
     try:
         conf_threshold, image_size = parse_prediction_settings()
@@ -331,6 +331,9 @@ def predict():
     cleanup_old_files(UPLOAD_FOLDER)
     try:
         result = predict_once(frame, conf_threshold, image_size)
+    except ModelUnavailableError as error:
+        app.logger.error("Upload prediction unavailable: %s", error)
+        return render_template("index.html", message="Mô hình AI hiện không khả dụng."), 503
     except Exception:
         app.logger.exception("Upload image inference failed")
         return render_template("index.html", message="AI đang gặp lỗi khi phân tích ảnh."), 500
@@ -576,6 +579,9 @@ def camera_predict():
         result = predict_once(frame, conf_threshold, image_size)
     except ValueError as error:
         return jsonify({"success": False, "detected": False, "object_count": 0, "objects": [], "message": str(error)}), 400
+    except ModelUnavailableError as error:
+        app.logger.error("Camera prediction unavailable: %s", error)
+        return jsonify({"success": False, "detected": False, "object_count": 0, "objects": [], "message": "Mô hình AI hiện không khả dụng"}), 503
     except Exception:
         app.logger.exception("Camera inference failed")
         return jsonify({"success": False, "detected": False, "object_count": 0, "objects": [], "message": "AI đang gặp lỗi"}), 500
@@ -776,4 +782,4 @@ def init_app():
 init_app()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    app.run(host="127.0.0.1", port=5000, debug=False)

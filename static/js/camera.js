@@ -435,4 +435,5 @@ cameraImageSize.addEventListener("input", updateCameraSettings);
 cameraInterval.addEventListener("input", updateCameraSettings);
 startCameraBtn.addEventListener("click", startCamera);
 stopCameraBtn.addEventListener("click", stopCamera);
+window.addEventListener("pagehide", stopCamera, { once: true });
 updateCameraSettings();

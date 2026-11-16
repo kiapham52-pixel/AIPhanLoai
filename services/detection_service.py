@@ -1,3 +1,4 @@
+import logging
 import threading
 from pathlib import Path
 
@@ -7,11 +8,16 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 MODEL_RELATIVE_PATH = Path("models/phan_loai_rac.pt")
 MODEL_PATH = BASE_DIR / MODEL_RELATIVE_PATH
 
-if not MODEL_PATH.is_file():
-    raise FileNotFoundError(f"Không tìm thấy model: {MODEL_RELATIVE_PATH.as_posix()}")
+model: YOLO | None = None
+try:
+    if not MODEL_PATH.is_file():
+        raise FileNotFoundError(f"Không tìm thấy model: {MODEL_RELATIVE_PATH.as_posix()}")
+    model = YOLO(str(MODEL_PATH))
+    model.to("cpu")
+except Exception:
+    logging.getLogger(__name__).exception("Could not load YOLO model: %s", MODEL_RELATIVE_PATH.as_posix())
+    model = None
 
-model = YOLO(str(MODEL_PATH))
-model.to("cpu")
 INFERENCE_LOCK = threading.BoundedSemaphore(1)
 
 CLASS_COLORS = {
@@ -35,7 +41,13 @@ DISPLAY_CLASS_LABELS = {
 }
 
 
+class ModelUnavailableError(RuntimeError):
+    pass
+
+
 def predict_once(source, confidence, image_size):
+    if model is None:
+        raise ModelUnavailableError(f"YOLO model is unavailable: {MODEL_RELATIVE_PATH.as_posix()}")
     if not INFERENCE_LOCK.acquire(blocking=False):
         return None
     try:
@@ -53,6 +65,8 @@ def predict_once(source, confidence, image_size):
 
 
 def normalize_objects(result, conf_threshold=0.4):
+    if model is None:
+        raise ModelUnavailableError(f"YOLO model is unavailable: {MODEL_RELATIVE_PATH.as_posix()}")
     objects = []
     if result is None or result.boxes is None:
         return objects

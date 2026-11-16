@@ -22,6 +22,21 @@ def get_setting(name: str, default: str = "") -> str:
     return default
 
 
+def get_session_cookie_secure() -> bool:
+    environment = get_setting("APP_ENV", "production").lower()
+    if environment not in {"development", "production"}:
+        raise ValueError("APP_ENV must be development or production")
+
+    configured = get_setting("SESSION_COOKIE_SECURE").lower()
+    if configured not in {"", "true", "false"}:
+        raise ValueError("SESSION_COOKIE_SECURE must be set to true or false")
+
+    secure = configured == "true" if configured else environment == "production"
+    if environment == "production" and not secure:
+        raise ValueError("SESSION_COOKIE_SECURE cannot be false in production")
+    return secure
+
+
 def get_flask_secret_key() -> str:
     configured = get_setting("FLASK_SECRET_KEY")
     if configured:
