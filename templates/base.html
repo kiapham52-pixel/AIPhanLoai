@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f1efe7">
+    <meta name="description" content="ECO VISION AI giúp bạn nhận diện vật liệu, hiểu cách xử lý và tìm ý tưởng tái sử dụng phù hợp.">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+    <title>{% block title %}ECO VISION AI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body class="{{ body_class|default('') }}">
+    <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+    <header class="site-header" id="siteHeader">
+        <a class="wordmark" href="/" aria-label="ECO VISION AI, về trang chủ">
+            <span class="wordmark-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span><strong>ECO VISION</strong><small>AI</small></span>
+        </a>
+        <button class="mobile-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="primaryNav" data-nav-toggle>
+            <span></span><span></span>
+        </button>
+        <nav class="primary-nav" id="primaryNav" aria-label="Điều hướng chính">
+            <a href="/" {% if request.endpoint == 'home' %}aria-current="page"{% endif %}>Trang chủ</a>
+            <a href="/#scan-panel">Quét vật thể</a>
+            <a href="/camera" {% if request.endpoint == 'camera' %}aria-current="page"{% endif %}>Camera AI</a>
+            <a href="/explore" {% if request.endpoint == 'explore_page' %}aria-current="page"{% endif %}>Khám phá</a>
+            <a href="/guide" {% if request.endpoint == 'guide_page' %}aria-current="page"{% endif %}>Hướng dẫn</a>
+        </nav>
+        <button class="nav-assistant" type="button" data-assistant-open>
+            <span class="assistant-spark" aria-hidden="true">✳</span> Trợ lý AI
+        </button>
+    </header>
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <a class="wordmark footer-wordmark" href="/">
+            <span class="wordmark-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span><strong>ECO VISION</strong><small>AI</small></span>
+        </a>
+        <p>Nhìn thấy rác. Hiểu giá trị. Tái tạo tương lai.</p>
+        <nav aria-label="Liên kết chân trang">
+            <a href="/">Trang chủ</a><a href="/#scan-panel">Quét vật thể</a><a href="/camera">Camera AI</a><a href="/explore">Khám phá</a><a href="/favorites">Ý tưởng đã lưu</a><a href="/history">Đã khám phá</a><a href="/guide">Hướng dẫn</a>
+        </nav>
+        <span class="footer-note">Một vật thể, thêm một vòng đời.</span>
+    </footer>
+
+    <div class="assistant-widget" id="assistantWidget">
+        <section class="assistant-panel" id="assistantPanel" aria-label="Trợ lý AI" aria-hidden="true">
+            <header class="assistant-header">
+                <div><span class="assistant-spark" aria-hidden="true">✳</span><strong>Trợ lý AI</strong><small>Hỏi về vật liệu, ý tưởng hoặc bất cứ điều gì.</small></div>
+                <button class="icon-button" type="button" id="assistantClose" aria-label="Đóng trợ lý">×</button>
+            </header>
+            <div class="assistant-messages" id="assistantMessages" aria-live="polite" aria-relevant="additions">
+                <div class="message ai-message"><p>Xin chào. Bạn đang muốn tìm hiểu điều gì?</p></div>
+            </div>
+            <form class="assistant-form" id="assistantForm">
+                <label class="sr-only" for="assistantInput">Tin nhắn của bạn</label>
+                <input id="assistantInput" type="text" placeholder="Viết câu hỏi..." autocomplete="off" maxlength="2000">
+                <button type="submit" aria-label="Gửi tin nhắn">Gửi</button>
+            </form>
+            <p class="assistant-disclaimer">Trợ lý đa năng cần API key ở backend. Hướng dẫn tái chế được bổ sung từ thư viện dữ liệu của dự án.</p>
+        </section>
+        <button class="assistant-toggle" id="assistantToggle" type="button" aria-label="Mở Trợ lý AI" aria-expanded="false" aria-controls="assistantPanel" title="Trợ lý AI">
+            <span aria-hidden="true">✳</span>
+        </button>
+    </div>
+
+    <script>
+        window.ECO_SESSION_ID = {{ browser_session_id|tojson }};
+        window.WASTE_CHAT_CONTEXT = {{ chat_context|default({}, true)|tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

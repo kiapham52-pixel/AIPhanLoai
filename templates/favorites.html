@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Ý tưởng đã lưu — ECO VISION AI{% endblock %}
+{% block content %}
+<section class="page-wrap editorial-page favorites-page">
+    <header class="page-heading">
+        <p class="eyebrow">THƯ VIỆN CỦA BẠN</p>
+        <h1>Ý tưởng<br><em>đã lưu.</em></h1>
+        <p>Những hướng dẫn bạn muốn quay lại, được lưu riêng trên trình duyệt này.</p>
+    </header>
+    {% if projects %}
+    <div class="project-gallery explore-gallery">
+        {% for project in projects %}
+        <article class="saved-project-entry">
+            <a class="project-tile" href="/projects/{{ project.id }}">
+                <div class="project-image"><img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy"><span class="project-open" aria-hidden="true">↗</span></div>
+                <div class="project-meta"><span>{{ project.display_name }}</span><span>{{ project.difficulty }} · {{ project.time }}</span></div>
+                <h2>{{ project.title }}</h2><p>{{ project.description }}</p>
+            </a>
+            <button class="save-project-button" type="button" data-favorite-button data-project-id="{{ project.id }}" aria-pressed="true">Đã lưu <span aria-hidden="true">✓</span></button>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="discovery-empty"><span>01</span><div><h2>Thư viện đang chờ ý tưởng đầu tiên.</h2><p>Mở một hướng dẫn bạn thích và lưu lại để tìm nhanh khi cần.</p><a class="button button-dark" href="/explore">Khám phá hướng dẫn <span aria-hidden="true">↗</span></a></div></div>
+    {% endif %}
+</section>
+{% endblock %}

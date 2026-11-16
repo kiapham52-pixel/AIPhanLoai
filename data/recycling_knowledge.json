@@ -1,0 +1,643 @@
+{
+  "BIODEGRADABLE": {
+    "name": "BIODEGRADABLE",
+    "display_name": "Rác hữu cơ",
+    "icon": "🌱",
+    "color": "#2e8b57",
+    "description": "Rác hữu cơ có thể phân hủy sinh học và chuyển thành phân bón hoặc cải tạo đất.",
+    "material_type": "organic",
+    "preparation": [
+      "Rửa sạch và tách bỏ chất bẩn hoặc túi nhựa dính trong quá trình thu gom.",
+      "Không cho các vỏ thực phẩm có hóa chất, thuốc trừ sâu, pin, dung môi vào khối hữu cơ."
+    ],
+    "reuse_ideas": [
+      "Ủ thành compost cho vườn nhà",
+      "Làm mulch cho cây cảnh",
+      "Cải tạo đất trong chậu trồng"
+    ],
+    "diy_projects": [
+      "Compost mini",
+      "Phân bón hữu cơ",
+      "Mulch cho cây"
+    ],
+    "projects": [
+      {
+        "id": "compost-mini",
+        "name": "Compost mini",
+        "category": "Đồ trồng cây",
+        "difficulty": "Dễ",
+        "time": "15-20 phút",
+        "materials": ["Rác hữu cơ", "Thùng nhỏ", "Lớp lót giấy", "Nước vừa đủ"],
+        "tools": ["Thùng chứa", "Nắp thoáng khí", "Kéo"],
+        "steps": [
+          "Lấy phần rác hữu cơ khô và sạch.",
+          "Cho lớp cát hoặc giấy mùn vào đáy thùng.",
+          "Xếp lớp hữu cơ xen kẽ với lớp bã mùn hoặc cành nhỏ.",
+          "Giữ ẩm vừa phải và đảo đều mỗi vài ngày.",
+          "Sau 2-4 tuần, dùng làm phân bón cho cây."
+        ],
+        "warning": "Không bỏ thức ăn đã nhiễm hóa chất, thuốc trừ sâu, phân tươi chưa được xử lý vào khối compost.",
+        "final_product": "Phân bón hữu cơ cho cây cảnh hoặc vườn nhà."
+      },
+      {
+        "id": "mulch-garden",
+        "name": "Mulch cho cây",
+        "category": "Đồ trồng cây",
+        "difficulty": "Dễ",
+        "time": "20-30 phút",
+        "materials": ["Rác hữu cơ", "Lớp lót giấy", "Cát hoặc đất"],
+        "tools": ["Thùng", "Kéo", "Hộp đựng"],
+        "steps": [
+          "Phân loại rác hữu cơ sạch.",
+          "Ngâm ngắn để giảm mùi.",
+          "Phủ lên bề mặt đất quanh cây.",
+          "Giữ độ ẩm và tránh rải quá dày."
+        ],
+        "warning": "Không dùng lớp hữu cơ có mùi hôi nặng hoặc đã nhiễm chất độc.",
+        "final_product": "Lớp phủ đất giữ ẩm và bổ sung dinh dưỡng."
+      },
+      {
+        "id": "organic-soil-enrichment",
+        "name": "Đất trồng giàu hữu cơ",
+        "category": "Đồ trồng cây",
+        "difficulty": "Dễ",
+        "time": "10-15 phút",
+        "materials": ["Compost đã hoai", "Đất trồng", "Chậu cây"],
+        "tools": ["Bay làm vườn", "Găng tay"],
+        "steps": [
+          "Chỉ chọn compost đã hoai, không còn mùi khó chịu.",
+          "Trộn một phần compost với đất trồng sạch.",
+          "Cho hỗn hợp vào chậu và trồng cây phù hợp.",
+          "Tưới lượng nước vừa đủ và theo dõi cây."
+        ],
+        "warning": "Không dùng phân tươi hoặc vật liệu hữu cơ chưa phân hủy cho cây ăn được.",
+        "final_product": "Hỗn hợp đất trồng được bổ sung chất hữu cơ đã ủ chín."
+      }
+    ],
+    "recycling_process": "Ủ sinh học và phân hủy sinh học để tái sử dụng như phân bón hoặc cải tạo đất.",
+    "disposal_method": "Tách riêng, ủ trong thùng compost hoặc đưa tới điểm xử lý hữu cơ phù hợp.",
+    "warnings": [
+      "Không đưa hóa chất, pin, thuốc trừ sâu hoặc vật liệu độc hại vào buồng ủ hữu cơ.",
+      "Tránh để vật liệu hữu cơ bị ẩm quá mức trong thời gian dài.",
+      "Nếu có mùi khó chịu mạnh, cân nhắc tách và thay đổi cấu trúc ủ."
+    ],
+    "difficulty": "Dễ",
+    "tools": ["Thùng compost", "Kéo", "Khăn giấy"],
+    "materials": ["Rác hữu cơ", "Xơ thực vật", "Không khí", "Nước"],
+    "steps": [
+      "Làm sạch và tách các phần có hóa chất.",
+      "Đặt lớp hữu cơ và lớp cành/xơ phụ thêm.",
+      "Ủ ở nơi thoáng, tránh ánh nắng trực tiếp.",
+      "Đảo đều và sử dụng khi đã chín."
+    ],
+    "final_products": [
+      "Phân bón tự nhiên",
+      "Compost mini",
+      "Mulch"
+    ]
+  },
+  "CARDBOARD": {
+    "name": "CARDBOARD",
+    "display_name": "Bìa carton",
+    "icon": "📦",
+    "color": "#a86e49",
+    "description": "Carton là vật liệu nhẹ, dễ tái chế và phù hợp cho nhiều sản phẩm lưu trữ và đồ thủ công.",
+    "material_type": "paperboard",
+    "preparation": [
+      "Loại bỏ băng dính, giấy dán và nhãn dán trước khi tái sử dụng.",
+      "Nén carton để tiết kiệm không gian trước khi thu gom."
+    ],
+    "reuse_ideas": [
+      "Hộp đựng đồ nhỏ",
+      "Organizer bàn học",
+      "Hộp quà handmade",
+      "Mô hình nhỏ"
+    ],
+    "diy_projects": [
+      "Organizer bàn học",
+      "Hộp quà",
+      "Kệ mini"
+    ],
+    "projects": [
+      {
+        "id": "organizer-cardboard",
+        "name": "Organizer bàn học",
+        "category": "Đồ dùng học tập",
+        "difficulty": "Dễ",
+        "time": "25-35 phút",
+        "materials": ["Carton", "Keo dán", "Giấy trang trí", "Thước"],
+        "tools": ["Kéo", "Thước", "Bút chì"],
+        "steps": [
+          "Đo kích thước và vẽ hình hộp trên carton.",
+          "Cắt theo hình dạng thiết kế.",
+          "Gấp theo đường gấp và dán chắc chắn.",
+          "Trang trí và dùng để chứa bút, thước, giấy."
+        ],
+        "warning": "Tránh dùng keo quá nhiều khiến sản phẩm dễ cong hoặc nứt.",
+        "final_product": "Organizer bàn học lưu trữ đồ dùng nhỏ."
+      },
+      {
+        "id": "gift-box-cardboard",
+        "name": "Hộp quà",
+        "category": "Đồ trang trí",
+        "difficulty": "Dễ",
+        "time": "20-25 phút",
+        "materials": ["Carton", "Giấy màu", "Keo", "Ruy băng"],
+        "tools": ["Kéo", "Thước", "Bút"],
+        "steps": [
+          "Vẽ hình hộp gấp phù hợp.",
+          "Cắt và gấp các cạnh.",
+          "Dán giấy trang trí bên ngoài.",
+          "Cắt ruy băng và gói quà."
+        ],
+        "warning": "Tránh nhét quà quá nặng làm tổn hại hộp.",
+        "final_product": "Hộp quà handmade."
+      },
+      {
+        "id": "cardboard-mini-shelf",
+        "name": "Kệ mini để bàn",
+        "category": "Đồ dùng học tập",
+        "difficulty": "Trung bình",
+        "time": "35-45 phút",
+        "materials": ["Carton hai lớp sạch", "Keo dán", "Giấy bọc"],
+        "tools": ["Thước", "Bút chì", "Kéo"],
+        "steps": [
+          "Đo mặt bàn và vẽ hai vách bên cùng các tầng kệ.",
+          "Cắt các miếng carton theo cùng kích thước.",
+          "Dán chồng carton ở mặt chịu lực để tăng độ cứng.",
+          "Lắp các tầng, giữ cố định đến khi keo khô.",
+          "Bọc giấy trang trí và chỉ đặt vật nhẹ lên kệ."
+        ],
+        "warning": "Kệ carton không chịu tải nặng hoặc đặt gần nước; nhờ người lớn hỗ trợ khi dùng kéo.",
+        "final_product": "Kệ mini để bàn cho giấy ghi chú và vật dụng nhẹ."
+      }
+    ],
+    "recycling_process": "Thu gom và tái chế thành bao bì hoặc nguyên liệu giấy/carton mới.",
+    "disposal_method": "Tách sạch băng dính và nhãn dán rồi đưa tới điểm thu gom carton.",
+    "warnings": [
+      "Không đưa carton bị dính dầu mỡ, hóa chất hoặc bị ẩm lâu."
+    ],
+    "difficulty": "Dễ",
+    "tools": ["Kéo", "Thước", "Keo"],
+    "materials": ["Carton", "Giấy trang trí", "Băng dính"],
+    "steps": [
+      "Tách băng dính và nhãn dán.",
+      "Nén carton lại.",
+      "Đưa đến điểm thu gom hoặc tái sử dụng cho đồ thủ công."
+    ],
+    "final_products": [
+      "Hộp đựng đồ",
+      "Hộp quà",
+      "Organizer"
+    ]
+  },
+  "GLASS": {
+    "name": "GLASS",
+    "display_name": "Thủy tinh",
+    "icon": "🫙",
+    "color": "#1ba7c8",
+    "description": "Thủy tinh có thể tái chế nhiều lần, nhưng cần được xử lý an toàn do nguy cơ vỡ kính khi làm việc.",
+    "material_type": "glass",
+    "preparation": [
+      "Rửa sạch và tách phần nắp hoặc nhãn dán.",
+      "Không chạm tay vào mảnh kính vỡ hoặc vật thể có cạnh sắc."
+    ],
+    "reuse_ideas": [
+      "Lọ cây mini",
+      "Lọ hoa",
+      "Hũ đựng gia vị",
+      "Đèn trang trí"
+    ],
+    "diy_projects": [
+      "Lọ cây",
+      "Lọ hoa",
+      "Hũ đựng"
+    ],
+    "projects": [
+      {
+        "id": "glass-vase",
+        "name": "Lọ cây mini",
+        "category": "Đồ trang trí",
+        "difficulty": "Dễ",
+        "time": "15-20 phút",
+        "materials": ["Lọ thủy tinh", "Đất", "Cây nhỏ"],
+        "tools": ["Kéo", "Dụng cụ vệ sinh"],
+        "steps": [
+          "Rửa sạch lọ thủy tinh.",
+          "Cho đất và thêm cây nhỏ.",
+          "Đặt nơi có ánh sáng phù hợp.",
+          "Giữ thùng lọ ở nơi chắc chắn và tránh va đập."
+        ],
+        "warning": "Không tự cắt hoặc xử lý kính vỡ bằng tay. Nếu vỡ, thu gom bằng dụng cụ an toàn và mang đến điểm xử lý phù hợp.",
+        "final_product": "Lọ cây mini hoặc chậu cây nhỏ."
+      },
+      {
+        "id": "glass-flower-vase",
+        "name": "Lọ hoa tái sử dụng",
+        "category": "Đồ trang trí",
+        "difficulty": "Dễ",
+        "time": "10-15 phút",
+        "materials": ["Chai thủy tinh nguyên vẹn", "Hoa tươi hoặc hoa khô", "Nước sạch"],
+        "tools": ["Bàn chải rửa chai", "Khăn lau"],
+        "steps": [
+          "Kiểm tra chai không có vết nứt hoặc mẻ cạnh.",
+          "Rửa sạch chai và để khô mặt ngoài.",
+          "Thêm nước nếu dùng hoa tươi.",
+          "Cắm hoa và đặt trên bề mặt vững chắc."
+        ],
+        "warning": "Không sử dụng chai nứt, mẻ hoặc đã vỡ; tránh đặt ở mép bàn.",
+        "final_product": "Lọ hoa đơn giản từ chai thủy tinh còn nguyên vẹn."
+      },
+      {
+        "id": "glass-storage-jar",
+        "name": "Hũ lưu trữ khô",
+        "category": "Đồ dùng gia đình",
+        "difficulty": "Dễ",
+        "time": "10-15 phút",
+        "materials": ["Lọ thủy tinh nguyên vẹn", "Nắp tương thích", "Nhãn giấy"],
+        "tools": ["Bàn chải rửa lọ", "Khăn lau"],
+        "steps": [
+          "Kiểm tra miệng lọ và thân lọ không bị mẻ hoặc nứt.",
+          "Rửa kỹ, tráng sạch và để khô hoàn toàn.",
+          "Dán nhãn theo mục đích sử dụng.",
+          "Chỉ lưu trữ đồ khô không dùng làm thực phẩm nếu chưa xác minh an toàn."
+        ],
+        "warning": "Không dùng lọ từng chứa hóa chất hoặc thuốc để đựng thực phẩm, nước uống hay thuốc khác.",
+        "final_product": "Hũ đựng đồ khô hoặc vật dụng nhỏ có nắp."
+      },
+      {
+        "id": "glass-terrarium",
+        "name": "Terrarium trong lọ",
+        "category": "Đồ trồng cây",
+        "difficulty": "Trung bình",
+        "time": "25-35 phút",
+        "materials": ["Lọ thủy tinh miệng rộng", "Sỏi nhỏ", "Đất trồng", "Rêu hoặc cây mini"],
+        "tools": ["Muỗng nhỏ", "Kẹp gắp dài"],
+        "steps": [
+          "Rửa sạch lọ nguyên vẹn và lau khô.",
+          "Xếp một lớp sỏi mỏng ở đáy lọ.",
+          "Thêm đất phù hợp với loại cây đã chọn.",
+          "Đặt cây bằng kẹp, thêm một ít nước và không tưới quá nhiều.",
+          "Đặt nơi có ánh sáng tán xạ, tránh nắng gắt trực tiếp."
+        ],
+        "warning": "Không dùng lọ nứt hoặc mẻ; tránh đậy kín nếu cây không phù hợp môi trường kín.",
+        "final_product": "Terrarium mini trong lọ thủy tinh còn nguyên vẹn."
+      }
+    ],
+    "recycling_process": "Tách theo màu và mang đến điểm thu gom thủy tinh để tái chế thành chai, lọ mới hoặc sản phẩm kính.",
+    "disposal_method": "Không vứt chung với rác thường. Cần thu gom riêng và an toàn.",
+    "warnings": [
+      "Nếu kính bị vỡ, không chạm bằng tay trần. Dùng găng tay hoặc túi kín và mang đến nơi thu gom an toàn.",
+      "Không sử dụng các kỹ thuật cắt, mài hoặc xử lý thủy tinh không an toàn ở nhà."
+    ],
+    "difficulty": "Trung bình",
+    "tools": ["Găng tay", "Túi kín", "Khay chứa"],
+    "materials": ["Kính sạch", "Nắp nhựa", "Băng dính"],
+    "steps": [
+      "Rửa sạch và tách nắp.",
+      "Phân loại theo màu nếu có thể.",
+      "Đóng gói an toàn và đưa đến điểm thu gom."
+    ],
+    "final_products": [
+      "Lọ trang trí",
+      "Lọ cây",
+      "Hũ đựng"
+    ]
+  },
+  "METAL": {
+    "name": "METAL",
+    "display_name": "Kim loại",
+    "icon": "🔩",
+    "color": "#667085",
+    "description": "Kim loại có giá trị tái chế cao nhưng cần được làm sạch và phân loại đúng cách để đảm bảo an toàn.",
+    "material_type": "metal",
+    "preparation": [
+      "Rửa sạch bằng nước và loại bỏ nhãn dán hoặc nắp nhựa.",
+      "Nếu là kim loại sắc hoặc bị vỡ, không chạm bằng tay trần."
+    ],
+    "reuse_ideas": [
+      "Chậu cây mini",
+      "Hộp đựng",
+      "Organizer",
+      "Đồ trang trí"
+    ],
+    "diy_projects": [
+      "Organizer kim loại",
+      "Chậu cây mini",
+      "Hộp đựng"
+    ],
+    "projects": [
+      {
+        "id": "metal-planter",
+        "name": "Chậu cây mini",
+        "category": "Đồ trồng cây",
+        "difficulty": "Dễ",
+        "time": "20-30 phút",
+        "materials": ["Lon kim loại sạch", "Đất", "Cây nhỏ"],
+        "tools": ["Kéo hoặc dụng cụ cắt", "Bàn chải"],
+        "steps": [
+          "Rửa sạch lon và loại bỏ lớp nhãn dán.",
+          "Tạo lỗ thoát nước ở đáy.",
+          "Cho đất và trồng cây.",
+          "Đặt nơi đủ sáng."
+        ],
+        "warning": "Không dùng lon kim loại có cạnh sắc nếu chưa xử lý. Đảm bảo cắt và làm mịn mép cạnh trước khi sử dụng.",
+        "final_product": "Chậu cây mini."
+      },
+      {
+        "id": "metal-desk-organizer",
+        "name": "Ống cắm bút từ lon",
+        "category": "Đồ dùng học tập",
+        "difficulty": "Dễ",
+        "time": "15-20 phút",
+        "materials": ["Lon sạch, mép cuộn an toàn", "Giấy bọc", "Keo dán"],
+        "tools": ["Thước", "Bút", "Khăn lau"],
+        "steps": [
+          "Chỉ chọn lon có miệng cuộn tròn, không còn cạnh sắc.",
+          "Rửa sạch bên trong và để khô hoàn toàn.",
+          "Đo giấy bọc theo chiều cao và chu vi lon.",
+          "Dán giấy bọc quanh thân lon và để keo khô.",
+          "Dùng để cắm bút hoặc dụng cụ nhẹ."
+        ],
+        "warning": "Không tự cắt lon. Loại bỏ lon có cạnh sắc, gỉ sét hoặc từng chứa hóa chất.",
+        "final_product": "Ống cắm bút để bàn từ lon kim loại an toàn."
+      },
+      {
+        "id": "metal-herb-holder",
+        "name": "Vỏ chậu cây bọc lon",
+        "category": "Đồ trồng cây",
+        "difficulty": "Dễ",
+        "time": "15-20 phút",
+        "materials": ["Lon sạch, mép cuộn an toàn", "Chậu cây nhỏ còn nguyên", "Dây gai hoặc giấy bọc"],
+        "tools": ["Kéo", "Khăn lau"],
+        "steps": [
+          "Chọn lon có kích thước lớn hơn chậu cây nhỏ.",
+          "Rửa sạch và kiểm tra kỹ miệng lon không có cạnh sắc.",
+          "Bọc bên ngoài bằng dây hoặc giấy trang trí.",
+          "Đặt nguyên chậu cây vào trong lon, không đổ đất trực tiếp.",
+          "Lấy chậu trong ra khi tưới để nước không đọng trong vỏ lon."
+        ],
+        "warning": "Không khoan hoặc cắt lon tại nhà; loại bỏ lon có cạnh sắc hoặc gỉ.",
+        "final_product": "Vỏ chậu trang trí có thể tháo rời và tái sử dụng."
+      }
+    ],
+    "recycling_process": "Khử nhãn, làm sạch và đưa tới điểm thu gom kim loại hoặc cơ sở tái chế phù hợp.",
+    "disposal_method": "Gom riêng, tránh rơi vỡ hoặc tiếp xúc với hóa chất và pin.",
+    "warnings": [
+      "Không xử lý lon hoặc vật liệu kim loại sắc bằng tay không bảo hộ.",
+      "Không cho kim loại vào với chất lỏng độc hại."
+    ],
+    "difficulty": "Dễ",
+    "tools": ["Bàn chải", "Kéo", "Găng tay"],
+    "materials": ["Kim loại sạch", "Chất tẩy nhẹ", "Nước"],
+    "steps": [
+      "Làm sạch và loại bỏ lớp nhãn dán.",
+      "Phân loại và thu gom riêng theo loại.",
+      "Đưa đến nơi tái chế kim loại."
+    ],
+    "final_products": [
+      "Chậu cây",
+      "Organizer",
+      "Khung đồ trang trí"
+    ]
+  },
+  "PAPER": {
+    "name": "PAPER",
+    "display_name": "Giấy",
+    "icon": "📄",
+    "color": "#4a90e2",
+    "description": "Giấy sạch và khô có thể tái chế hoặc tái sử dụng thành nhiều sản phẩm thủ công, đồ dùng học tập và lưu trữ.",
+    "material_type": "paper",
+    "preparation": [
+      "Loại bỏ các tờ giấy có dầu mỡ, bẩn hoặc dính chất lỏng.",
+      "Giữ khô và phân loại theo độ dày, màu sắc nếu cần."
+    ],
+    "reuse_ideas": [
+      "Sổ tay tái chế",
+      "Thiệp handmade",
+      "Túi giấy",
+      "Giấy thủ công"
+    ],
+    "diy_projects": [
+      "Sổ tay tái chế",
+      "Thiệp handmade",
+      "Túi giấy"
+    ],
+    "projects": [
+      {
+        "id": "paper-notebook",
+        "name": "Sổ tay tái chế",
+        "category": "Đồ dùng học tập",
+        "difficulty": "Dễ",
+        "time": "30-40 phút",
+        "materials": ["Giấy cũ", "Thước", "Keo", "Bìa cứng"],
+        "tools": ["Kéo", "Kim gài", "Bút chì"],
+        "steps": [
+          "Cắt giấy thành nhiều tờ đều nhau.",
+          "Xếp chồng và ghim lại thành tập.",
+          "Làm bìa cứng và dán lên trên.",
+          "Trang trí bìa bằng màu hoặc hình vẽ."
+        ],
+        "warning": "Nếu giấy quá ẩm hoặc mốc, không nên tái sử dụng cho sách hoặc hồ sơ.",
+        "final_product": "Sổ tay handmade."
+      },
+      {
+        "id": "paper-card",
+        "name": "Thiệp handmade",
+        "category": "Đồ trang trí",
+        "difficulty": "Dễ",
+        "time": "15-20 phút",
+        "materials": ["Giấy", "Màu vẽ", "Dụng cụ trang trí"],
+        "tools": ["Kéo", "Bút", "Keo"],
+        "steps": [
+          "Cắt giấy thành dạng thiệp.",
+          "Lắp các lớp và trang trí.",
+          "Viết lời chúc và gấp lại."
+        ],
+        "warning": "Giấy quá mỏng hoặc ẩm dễ rách và không phù hợp để làm thiệp bền.",
+        "final_product": "Thiệp thủ công."
+      },
+      {
+        "id": "paper-folded-bag",
+        "name": "Túi giấy gấp",
+        "category": "Đồ dùng gia đình",
+        "difficulty": "Dễ",
+        "time": "15-20 phút",
+        "materials": ["Giấy báo hoặc giấy gói sạch", "Keo giấy", "Dải giấy làm quai"],
+        "tools": ["Thước", "Bút chì", "Kéo"],
+        "steps": [
+          "Chọn tờ giấy khô, không dính dầu hoặc hóa chất.",
+          "Gấp hai mép dài chồng lên nhau và dán thành ống.",
+          "Gấp phần đáy thành hai vạt rồi dán kín.",
+          "Gập miệng túi vào trong để gia cố.",
+          "Dán quai giấy nếu cần và chỉ đựng vật nhẹ, khô."
+        ],
+        "warning": "Túi giấy thủ công không chống nước và không dùng để đựng thực phẩm trực tiếp.",
+        "final_product": "Túi giấy nhỏ để gói quà hoặc đựng vật dụng nhẹ."
+      },
+      {
+        "id": "paper-folded-decoration",
+        "name": "Dây trang trí giấy gấp",
+        "category": "Đồ trang trí",
+        "difficulty": "Dễ",
+        "time": "20-30 phút",
+        "materials": ["Giấy một mặt còn sạch", "Dây cotton", "Keo giấy"],
+        "tools": ["Kéo", "Thước", "Bút chì"],
+        "steps": [
+          "Cắt giấy thành các dải có chiều rộng bằng nhau.",
+          "Gấp mỗi dải theo nếp ziczac đều tay.",
+          "Tạo hình quạt hoặc hình trang trí đơn giản.",
+          "Dán cố định và luồn dây cotton qua các hình.",
+          "Treo ở nơi khô ráo, tránh gần nguồn nhiệt."
+        ],
+        "warning": "Không treo gần đèn nóng hoặc nến; dùng kéo cẩn thận.",
+        "final_product": "Dây trang trí nhẹ từ giấy đã qua sử dụng."
+      }
+    ],
+    "recycling_process": "Phân loại giấy khô và sạch rồi đưa tới điểm thu gom hoặc tái chế thành giấy mới.",
+    "disposal_method": "Không để giấy dính dầu mỡ hoặc bẩn trong túi tái chế chung.",
+    "warnings": [
+      "Giấy bị dính chất lỏng, bút nhớ, hoặc lớp phủ nhựa không nên đưa vào tái chế chung."
+    ],
+    "difficulty": "Dễ",
+    "tools": ["Kéo", "Máy cắt", "Keo"],
+    "materials": ["Giấy cũ", "Giấy màu", "Bìa cứng"],
+    "steps": [
+      "Loại bỏ các phần bẩn hoặc mốc.",
+      "Cắt và xếp lại theo dạng cần dùng.",
+      "Tái sử dụng hoặc mang đến điểm thu gom."
+    ],
+    "final_products": [
+      "Thiệp handmade",
+      "Túi giấy",
+      "Sổ tay tái chế"
+    ]
+  },
+  "PLASTIC": {
+    "name": "PLASTIC",
+    "display_name": "Nhựa",
+    "icon": "🧴",
+    "color": "#f5a623",
+    "description": "Nhựa có thể được tái sử dụng, tái chế hoặc biến thành sản phẩm tiện ích nếu đã rửa sạch và phân loại đúng cách.",
+    "material_type": "plastic",
+    "preparation": [
+      "Rửa sạch nhựa và bỏ hết các lớp nhãn dán, vỏ nắp, hoặc phần bám dính.",
+      "Không để nhựa có nhiều dầu mỡ hoặc hóa chất lẫn vào kho tái chế."
+    ],
+    "reuse_ideas": [
+      "Chậu cây mini",
+      "Hộp đựng đồ",
+      "Bình tưới cây",
+      "Đồ trang trí"
+    ],
+    "diy_projects": [
+      "Chậu cây mini",
+      "Hộp đựng đồ",
+      "Bình tưới cây"
+    ],
+    "projects": [
+      {
+        "id": "plastic-planter",
+        "name": "Chậu cây mini",
+        "category": "Đồ trồng cây",
+        "difficulty": "Dễ",
+        "time": "15-20 phút",
+        "materials": ["Chai nhựa", "Đất", "Cây nhỏ", "Dây trang trí"],
+        "tools": ["Kéo", "Bút đánh dấu", "Dụng cụ cắt"],
+        "steps": [
+          "Rửa sạch chai nhựa và tháo nhãn.",
+          "Đánh dấu vị trí cắt và tạo lỗ thoát nước.",
+          "Cắt chai thành thân chậu.",
+          "Cho đất và trồng cây."
+        ],
+        "warning": "Khuyến nghị dùng khăn hoặc găng tay khi cắt để tránh mép sắc.",
+        "final_product": "Chậu cây mini."
+      },
+      {
+        "id": "plastic-organizer",
+        "name": "Hộp đựng đồ",
+        "category": "Đồ dùng gia đình",
+        "difficulty": "Dễ",
+        "time": "20-30 phút",
+        "materials": ["Hộp nhựa", "Giấy trang trí", "Keo"],
+        "tools": ["Kéo", "Thước", "Bút"],
+        "steps": [
+          "Cắt hộp nhựa thành kích thước mong muốn.",
+          "Dán giấy trang trí lên ngoài.",
+          "Sử dụng như hộp bút hoặc tổ chức dây cáp."
+        ],
+        "warning": "Không dùng nhựa có mùi hôi hoặc dính chất lỏng độc hại để làm đồ dùng gần thức ăn.",
+        "final_product": "Hộp đựng đồ hoặc hộp bút."
+      },
+      {
+        "id": "plastic-sprayer",
+        "name": "Bình tưới cây mini",
+        "category": "Đồ trồng cây",
+        "difficulty": "Trung bình",
+        "time": "25-35 phút",
+        "materials": ["Chai nhựa", "Ống nhỏ", "Đầu kim"],
+        "tools": ["Kéo", "Đèn sưởi hoặc máy khoan nhỏ"],
+        "steps": [
+          "Rửa sạch chai nhựa và gắn đầu phun nước.",
+          "Chốt phần đầu với ống xếp gọn.",
+          "Kiểm tra và sử dụng cho cây cảnh."
+        ],
+        "warning": "Không dùng nhựa có chứa hóa chất trong môi trường thực phẩm hoặc nước uống.",
+        "final_product": "Bình tưới cây mini."
+      },
+      {
+        "id": "plastic-seed-starter",
+        "name": "Khay ươm cây mini",
+        "category": "Đồ trồng cây",
+        "difficulty": "Trung bình",
+        "time": "20-30 phút",
+        "materials": ["Khay nhựa sạch hoặc hộp thực phẩm", "Đất ươm", "Hạt giống"],
+        "tools": ["Bút đánh dấu", "Dụng cụ tạo lỗ an toàn"],
+        "steps": [
+          "Rửa sạch hộp nhựa và để khô.",
+          "Dùng hộp có lỗ thoát nước sẵn hoặc nhờ người lớn hỗ trợ tạo lỗ.",
+          "Cho đất ươm vào từng ngăn và gieo hạt theo hướng dẫn trên bao bì.",
+          "Tưới phun sương vừa đủ và đặt nơi có ánh sáng phù hợp.",
+          "Chuyển cây con sang chậu khi đủ lớn."
+        ],
+        "warning": "Không dùng hộp từng chứa hóa chất hoặc thịt sống; không tự đục hộp bằng vật nhọn.",
+        "final_product": "Khay ươm cây con có thể dùng lại nhiều lần."
+      },
+      {
+        "id": "plastic-cable-holder",
+        "name": "Hộp giữ dây gọn gàng",
+        "category": "Đồ dùng gia đình",
+        "difficulty": "Dễ",
+        "time": "10-15 phút",
+        "materials": ["Hộp nhựa sạch có nắp", "Nhãn giấy"],
+        "tools": ["Bút đánh dấu", "Thước"],
+        "steps": [
+          "Chọn hộp nhựa nhỏ, sạch và có nắp.",
+          "Cuộn dây sạc lỏng tay để tránh gập gãy.",
+          "Đặt dây vào hộp và dán nhãn theo thiết bị.",
+          "Cất hộp ở nơi khô ráo, tránh nguồn nhiệt."
+        ],
+        "warning": "Không đặt pin, thiết bị đang nóng hoặc adapter đang cắm điện vào hộp.",
+        "final_product": "Hộp lưu trữ dây sạc và cáp nhỏ gọn."
+      }
+    ],
+    "recycling_process": "Rửa sạch, phân loại theo loại nhựa, và đưa đến điểm thu gom hoặc nơi tái chế phù hợp.",
+    "disposal_method": "Đưa đến điểm tái chế nhựa hoặc tái sử dụng thành sản phẩm mới thô, nếu không thể tái xử lý thì không vứt vào môi trường sống.",
+    "warnings": [
+      "Không để nhựa tiếp xúc lâu với dầu mỡ, thuốc trừ sâu hoặc hóa chất nguy hiểm."
+    ],
+    "difficulty": "Dễ",
+    "tools": ["Kéo", "Bút đánh dấu", "Găng tay"],
+    "materials": ["Nhựa sạch", "Giấy trang trí", "Keo dán"],
+    "steps": [
+      "Làm sạch và khô hoàn toàn.",
+      "Phân loại nhựa theo loại nếu có thể.",
+      "Sử dụng lại hoặc đưa đến trung tâm tái chế."
+    ],
+    "final_products": [
+      "Chậu cây mini",
+      "Hộp đựng đồ",
+      "Bình tưới cây"
+    ]
+  }
+}

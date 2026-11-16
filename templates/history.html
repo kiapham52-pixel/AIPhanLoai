@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Những gì bạn đã khám phá — ECO VISION AI{% endblock %}
+{% block content %}
+<section class="page-wrap editorial-page discovery-page">
+    <header class="page-heading">
+        <p class="eyebrow">THƯ VIỆN CÁ NHÂN</p>
+        <h1>Những gì bạn<br>đã <em>khám phá.</em></h1>
+        <p>Mỗi lần quét là một cơ hội để hiểu rõ hơn về vật liệu quanh mình.</p>
+    </header>
+    {% if history %}
+    <div class="discovery-list">
+        {% for item in history %}
+        <article class="discovery-entry">
+            <a class="discovery-image" href="/{{ item.image_path }}" target="_blank" rel="noreferrer" aria-label="Mở ảnh gốc của lần nhận diện">
+                {% if item.image_path %}<img src="/{{ item.image_path }}" alt="Ảnh lần nhận diện" loading="lazy">{% else %}<span>Không còn ảnh</span>{% endif %}
+            </a>
+            <div class="discovery-detail">
+                <p class="eyebrow">{{ item.created_at }}</p>
+                <h2>{{ item.display_class }}</h2>
+                <p>{{ item.object_count }} vật thể · Độ tin cậy {{ item.confidence|round|int }}%</p>
+                {% if item.projects %}<div class="discovery-projects"><span>Có thể bắt đầu từ</span>{% for project in item.projects[:2] %}<a href="/projects/{{ project.id }}">{{ project.title }} <span aria-hidden="true">↗</span></a>{% endfor %}</div>{% endif %}
+            </div>
+            <span class="discovery-index">{{ "%02d"|format(loop.index) }}</span>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="discovery-empty"><span>01</span><div><h2>Chưa có lần khám phá nào.</h2><p>Hãy bắt đầu với một vật thể quanh bạn. Những lần quét sẽ được lưu tại đây trên thiết bị này.</p><a class="button button-dark" href="/#scan-panel">Quét một vật thể <span aria-hidden="true">↘</span></a></div></div>
+    {% endif %}
+</section>
+{% endblock %}

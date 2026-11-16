@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.env
+instance/
+uploads/
+static/results/
+.DS_Store
+.venv/
+venv/
+.pytest_cache/
+dataset/
+dataset_balanced/
+runs/
+*.db
+*.sqlite
+*.sqlite3
+*.pt
+!models/phan_loai_rac.pt
+/cd FĐại HọcNăm 4AI_PhanLoaiRac.txt

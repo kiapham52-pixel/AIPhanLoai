@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Khám phá ý tưởng — ECO VISION AI{% endblock %}
+{% block content %}
+<section class="page-wrap editorial-page explore-page">
+    <header class="page-heading">
+        <p class="eyebrow">THƯ VIỆN TÁI SỬ DỤNG</p>
+        <h1>Những thứ bạn<br>có thể <em>tái tạo.</em></h1>
+        <p>Những hướng dẫn nhỏ, bắt đầu từ vật liệu quen thuộc và kết thúc bằng một món đồ có ích.</p>
+        <p class="project-image-note">Hình minh họa được thiết kế riêng cho từng thành phẩm.</p>
+    </header>
+    <form class="explore-filters" id="projectFilters" role="search">
+        <label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">Tìm ý tưởng</span><input type="search" id="projectSearch" value="{{ search_query }}" placeholder="Tôi có thể làm gì với chai nhựa?" autocomplete="off"></label>
+        <label><span class="sr-only">Lọc theo vật liệu</span><select id="materialFilter"><option value="">Mọi vật liệu</option>{% for project in projects|unique(attribute='material') %}<option value="{{ project.material }}" {% if active_material == project.material %}selected{% endif %}>{{ project.display_name }}</option>{% endfor %}</select></label>
+        <label><span class="sr-only">Lọc theo độ khó</span><select id="difficultyFilter"><option value="">Mọi độ khó</option><option>Dễ</option><option>Trung bình</option><option>Khó</option></select></label>
+        <label><span class="sr-only">Lọc theo thời gian</span><select id="timeFilter"><option value="">Mọi thời lượng</option><option value="15">Dưới 15 phút</option><option value="30">15–30 phút</option><option value="60">30–60 phút</option><option value="61">Trên 60 phút</option></select></label>
+        <label><span class="sr-only">Lọc theo mục đích</span><select id="categoryFilter"><option value="">Mọi mục đích</option>{% for category in categories %}<option>{{ category }}</option>{% endfor %}</select></label>
+    </form>
+    <p class="results-count" id="projectCount" aria-live="polite">{{ projects|length }} hướng dẫn</p>
+    <div class="project-gallery explore-gallery" id="projectGallery">
+        {% for project in projects %}
+        <a class="project-tile" href="/projects/{{ project.id }}" data-project-card data-material="{{ project.material }}" data-difficulty="{{ project.difficulty }}" data-category="{{ project.category }}" data-minutes="{{ project.time }}" data-search="{{ (project.title ~ ' ' ~ project.description ~ ' ' ~ project.display_name ~ ' ' ~ project.category ~ ' ' ~ (project.materials|join(' ')))|lower }}">
+            <div class="project-image"><img src="{{ project.image }}" alt="Minh họa thành phẩm: {{ project.title }}" loading="lazy"><span class="project-open" aria-hidden="true">↗</span></div>
+            <div class="project-meta"><span>{{ project.display_name }}</span><span>{{ project.difficulty }} · {{ project.time }}</span></div>
+            <h2>{{ project.title }}</h2><p>{{ project.description }}</p>
+        </a>
+        {% endfor %}
+    </div>
+    <p class="filter-empty" id="filterEmpty" hidden>Chưa có hướng dẫn phù hợp. Hãy thử một lựa chọn khác.</p>
+</section>
+{% endblock %}

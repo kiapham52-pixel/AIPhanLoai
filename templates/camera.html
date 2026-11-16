@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Camera AI — ECO VISION AI{% endblock %}
+{% block content %}
+<section class="page-wrap camera-page" aria-labelledby="cameraTitle">
+    <header class="camera-intro">
+        <div><p class="eyebrow">NHẬN DIỆN TRỰC TIẾP</p><h1 id="cameraTitle">Đưa vật thể vào<br><em>khung hình.</em></h1></div>
+        <p>Mô hình hiện nhận diện 6 nhóm: hữu cơ, carton, thủy tinh, kim loại, giấy và nhựa. Quần áo và vật liệu ngoài danh sách chưa được hỗ trợ; dự đoán của AI không xác minh thành phần thực tế.</p>
+    </header>
+    <div class="camera-layout">
+        <section class="camera-view" aria-label="Khung hình camera">
+            <div class="camera-stage-box" id="cameraStage" data-state="off">
+                <video id="cameraVideo" autoplay playsinline muted aria-label="Hình ảnh trực tiếp từ camera"></video>
+                <canvas id="cameraCanvas" aria-hidden="true"></canvas>
+                <div class="camera-idle" id="cameraIdle"><span class="camera-reticle" aria-hidden="true"><i></i><i></i><i></i><i></i></span><p>Chưa bật camera</p><small>Đặt một vật thể trong khung hình để bắt đầu</small></div>
+                <div class="camera-live-state"><span class="camera-live-dot"></span><span id="statusText">Camera đang tắt</span></div>
+                <div class="camera-float-overlay hidden" id="cameraOverlay"><span id="overlayClass">Chưa xác định</span><strong id="overlayConfidence">0%</strong></div>
+            </div>
+            <div class="camera-actions">
+                <button id="startCameraBtn" class="button button-dark" type="button">Bật camera <span aria-hidden="true">↗</span></button>
+                <button id="stopCameraBtn" class="button button-outline" type="button" disabled>Tắt camera</button>
+                <span class="camera-count" id="countText" aria-live="polite">Chưa có vật thể</span>
+                <span class="sr-only" id="fpsText">0</span>
+            </div>
+            <p class="camera-error" id="cameraError" role="status" hidden></p>
+            <details class="camera-guidance">
+                <summary>Mẹo căn chỉnh để nhận diện tốt hơn</summary>
+                <ul>
+                    <li>Đặt một vật thể cần kiểm tra ở giữa khung hình; tránh để vật thể bị che khuất.</li>
+                    <li>Dùng ánh sáng đều, tránh ngược sáng và bóng đổ mạnh; chọn nền đơn giản tương phản.</li>
+                    <li>Giữ camera ổn định, đưa vật thể đủ gần để nhìn rõ nhưng vẫn nằm trọn trong khung.</li>
+                    <li>Quần áo không thuộc 6 lớp huấn luyện. Nếu AI gợi ý “Giấy” cho quần áo, hãy xem đó là nhận diện sai, không phải kết luận.</li>
+                </ul>
+            </details>
+        </section>
+        <aside class="camera-reading" aria-live="polite">
+            <div class="reading-heading"><p class="eyebrow">KẾT QUẢ TRỰC TIẾP</p><h2 id="readingTitle">Khung hình<br>đang chờ bạn.</h2><p id="readingMessage">Khi nhận diện được vật thể, thông tin và hướng dẫn phù hợp sẽ xuất hiện ở đây.</p></div>
+            <div class="mini-object-list" id="objectList"><p class="camera-empty-result">Chưa có kết quả nhận diện.</p></div>
+            <p class="camera-model-note">Mô hình chỉ có 6 lớp đã huấn luyện. Confidence là điểm dự đoán, không phải xác suất vật liệu đã được xác minh.</p>
+            <section class="camera-projects" id="cameraProjects" hidden><p class="eyebrow">CÓ THỂ BẮT ĐẦU TỪ</p><div id="cameraProjectList"></div><a class="text-link" id="allProjectsLink" href="/explore">Xem hướng dẫn <span aria-hidden="true">↗</span></a></section>
+            <details class="camera-settings">
+                <summary>Tùy chỉnh nhận diện</summary>
+                <label for="cameraConfidence">Độ nhạy nhận diện <output id="cameraConfidenceDisplay">0.40</output></label>
+                <input type="range" min="0.25" max="0.75" step="0.05" value="0.4" id="cameraConfidence">
+                <label for="cameraImageSize">Độ chi tiết <output id="cameraImageSizeDisplay">640</output></label>
+                <input type="range" min="320" max="640" step="64" value="640" id="cameraImageSize">
+                <input type="hidden" id="cameraInterval" value="500">
+                <span id="cameraIntervalDisplay" class="sr-only">500ms</span>
+            </details>
+        </aside>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/camera.js') }}" defer></script>{% endblock %}

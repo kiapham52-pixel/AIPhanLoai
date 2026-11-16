@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ project.title if project else "Không tìm thấy hướng dẫn" }} — ECO VISION AI{% endblock %}
+{% block content %}
+{% if project %}
+<article class="page-wrap project-detail">
+    <a class="back-link" href="/explore"><span aria-hidden="true">←</span> Thư viện ý tưởng</a>
+    <header class="project-hero">
+        <div class="project-hero-copy"><p class="eyebrow">{{ project.display_name }} &nbsp; / &nbsp; HƯỚNG DẪN TÁI SỬ DỤNG</p><h1>{{ project.title }}</h1><p>{{ project.description }}</p><div class="project-facts"><span>{{ project.difficulty }}</span><span>{{ project.time }}</span><span>{{ project.category }}</span></div><button class="save-project-button" type="button" data-favorite-button data-project-id="{{ project.id }}" aria-pressed="false">Lưu ý tưởng <span aria-hidden="true">＋</span></button></div>
+        <figure class="project-hero-image"><img src="{{ project.image }}" alt="Minh họa thành phẩm: {{ project.title }}"><figcaption>Minh họa riêng cho dự án</figcaption></figure>
+    </header>
+    <div class="project-instructions">
+        <aside class="project-supplies"><p class="eyebrow">CHUẨN BỊ</p><h2>Bạn cần gì?</h2><h3>Nguyên liệu</h3><ul>{% for item in project.materials or [] %}<li>{{ item }}</li>{% endfor %}</ul><h3>Dụng cụ</h3><ul>{% for item in project.tools or [] %}<li>{{ item }}</li>{% endfor %}</ul></aside>
+        <section class="project-steps"><p class="eyebrow">TỪNG BƯỚC MỘT</p><h2>Cùng bắt đầu.</h2><ol>{% for step in project.steps or [] %}<li><span>{{ "%02d"|format(loop.index) }}</span><p>{{ step }}</p></li>{% endfor %}</ol></section>
+    </div>
+    <section class="final-product"><p class="eyebrow">THÀNH PHẨM</p><h2>{{ project.final_product or project.description }}</h2><p>Một vật liệu được sử dụng thêm một lần nữa, theo cách có ích và vừa sức.</p></section>
+    {% if project.safety %}<aside class="safety-note" role="note"><span aria-hidden="true">!</span><div><strong>Lưu ý an toàn</strong><p>{{ project.safety }}</p></div></aside>{% endif %}
+</article>
+{% else %}
+<section class="page-wrap not-found"><p class="eyebrow">KHÔNG TÌM THẤY HƯỚNG DẪN</p><h1>Ý tưởng này<br><em>chưa có ở đây.</em></h1><a class="button button-dark" href="/explore">Quay lại khám phá <span aria-hidden="true">↗</span></a></section>
+{% endif %}
+{% endblock %}
